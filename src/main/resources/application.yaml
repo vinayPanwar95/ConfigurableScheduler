@@ -1,0 +1,49 @@
+spring:
+  application:
+  name: ConfigurableScheduler
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+      enabled: true
+  liquibase:
+    change-log: /db/changelog/db.changelog-master.xml
+
+
+com:
+  example:
+    custom-scheduler:
+      enabled: true
+      mandator-configuration:
+        "041" :
+          job-scheduler:
+            "cron": "0 0/1 * * * *"
+            "time-zone": "CET"
+            "lock-at-least-for": "PT01M"
+            "lock-at-most-for": "PT03M"
+        "042":
+          "cron": "0 0/1 * * * *"
+          "time-zone": "CET"
+          "lock-at-least-for": "PT01M"
+          "lock-at-most-for": "PT03M"
+        "043":
+          "cron": "-"
+          "time-zone": "CET"
+          "lock-at-least-for": "PT01M"
+          "lock-at-most-for": "PT03M"
+    scheduling:
+      executor:
+        core-pool-size: 3
+        max-pool-size: 5
+        queue-capacity: 50
+        thread-name-prefix: "Scheduling-task-"
+        waitForTasksToCompleteOnShutdown: true
+        awaitTerminationSeconds: 10
+

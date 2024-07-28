@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--Added the entity Car-->
+    <changeSet id="20170503041524-1" author="vinay">
+        <preConditions>
+            <not>
+                <tableExists tableName="shedlock"/>
+            </not>
+        </preConditions>
+        <createTable tableName="shedlock">
+            <column name="NAME" type="varchar(100)" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="LOCKED_BY" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="LOCKED_AT" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="LOCK_UNTIL" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
